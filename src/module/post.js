@@ -15,13 +15,6 @@ export const getPost = createThunkRequest(GET_POST, api.getPost);
 export const createPost = createThunkRequest(CREATE, api.createPost);
 export const changeFeild = createAction(CHANGE_FEILD, ({key, value}) => ({key, value}));
 export const setInitial = createAction(SET_INITIAL);
-export const goToHome = (history) => {
-    history.push('/');
-};
-
-export const setInit = () => {
-
-}
 
 const initialState = {
     posts: null,
@@ -47,9 +40,7 @@ const post = handleActions(
             ...state,
             response: action.payload
         }),
-        [SET_INITIAL]: (state, action) => ({
-
-        }),
+        [SET_INITIAL]: (state, action) => initialState,
     },
     initialState
 );

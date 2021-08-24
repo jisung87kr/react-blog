@@ -10,15 +10,16 @@ import {
 
 function ShowContainer({post, loading, getPost, history})
 {
-    const dispatch = useDispatch();
     let { postId } = useParams();
     useEffect(() => {
         getPost(postId);
-    }, [getPost, dispatch]);
+    }, [getPost]);
     return(
         <div>
            <Show post={post} loading={loading}></Show>
-           <button onClick={() => goToHome(history)} className="btn btn-primary">home</button>
+           <button onClick={() => history.goBack()} className="btn btn-primary">back</button>
+           <button className="btn btn-secondary mx-2">edit</button>
+           <button className="btn btn-danger">delete</button>
         </div>
     )
 }
