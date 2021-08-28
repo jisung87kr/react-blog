@@ -47,6 +47,7 @@ function App() {
             <div className="container py-5">
                 <Switch>
                     <Route path="/" exact component={ListContainer} />
+                    <Route path="/create/:postId" component={CreateContainer} />
                     <Route path="/create" component={CreateContainer} />
                     <Route path="/posts/:postId" component={ShowContainer} />
                     <Route path="/test" component={Test} />

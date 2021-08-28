@@ -1,23 +1,32 @@
 import CreateContainer from '../component/CreateActionButton';
-import { withRouter } from 'react-router-dom';
-import { createPost } from '../module/post';
+import { withRouter} from 'react-router-dom';
+import { createPost, updatePost, setInitial } from '../module/post';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
 const CreateActionButtonContainer = ({history}) => {
     const dispatch = useDispatch();
-    const {title, content, post} = useSelector(({post}) => ({
-        title: post.title,
-        content: post.content,
-        post : post.response
+    const {title, content, response, postData} = useSelector(({post}) => ({
+        title: post.post.title,
+        content: post.post.content,
+        response : post.response,
+        postData: post.post
     }));
 
     const onSubmit = () => {
-        const params = {
+        let params = {
             title : title,
             content : content,
         }
-        dispatch(createPost(params));
+        if(postData){
+            params = {
+                ...params,
+                id: postData.id,
+            }
+            dispatch(updatePost(params));
+        } else {
+            dispatch(createPost(params));
+        }
     }
 
     const onCancle = () => {
@@ -25,8 +34,9 @@ const CreateActionButtonContainer = ({history}) => {
     }
 
     useEffect(() => {
-        if(post){
-            history.push(`posts/${post.id}`);
+        if(response){
+            history.push(`/posts/${response.id}`);
+            dispatch(setInitial());
         }
     });
 

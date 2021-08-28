@@ -1,4 +1,5 @@
 import Show from '../component/Show';
+import ShowActionButtonContainer from "../container/ShowActionButtonContainer";
 import {getList, getPost, goToHome} from '../module/post';
 import { connect, useDispatch } from 'react-redux';
 import React, { useState, useEffect } from 'react';
@@ -17,9 +18,7 @@ function ShowContainer({post, loading, getPost, history})
     return(
         <div>
            <Show post={post} loading={loading}></Show>
-           <button onClick={() => history.goBack()} className="btn btn-primary">back</button>
-           <button className="btn btn-secondary mx-2">edit</button>
-           <button className="btn btn-danger">delete</button>
+           <ShowActionButtonContainer />
         </div>
     )
 }
