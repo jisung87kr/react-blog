@@ -1,4 +1,4 @@
-import { startLoading, finishLoading } from "../module/loading";
+import { startLoading, finishLoading, failureLoading } from "../module/loading";
 
 export default function createRequestThunk(type, request){
     return params => async dispatch => {
@@ -11,6 +11,12 @@ export default function createRequestThunk(type, request){
             });
             dispatch(finishLoading(type));
         } catch (e) {
+            console.error("Error response:");
+            console.error(e.response);
+            dispatch(failureLoading(type, e.response));
+            // console.error(e.response.data);
+            // console.error(e.response.status);
+            // console.error(e.response.headers);
             return e;
         }
     }

@@ -1,14 +1,14 @@
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {withRouter, useParams} from 'react-router-dom';
+import {withRouter, useParams, Redirect} from 'react-router-dom';
 import ShowActionButton from "../component/ShowActionButton";
-import {deletePost, setInitial} from "../module/post";
+import {deletePost, setInitial, getList} from "../module/post";
 
 const ShowActionButtonContainer = ({history}) => {
     let {postId} = useParams();
-    let {post, loading} = useSelector(({post, loading}) => ({
+    let {post, failureLoading} = useSelector(({post, loading}) => ({
         post: post.post,
-        loading: loading['post/GET_POST'],
+        failureLoading: loading['loading/FAILURE_LOADING'],
     }));
     const dispatch = useDispatch();
     const onEdit = () => {
@@ -23,13 +23,15 @@ const ShowActionButtonContainer = ({history}) => {
     const onDelete = () => {
         if (window.confirm('삭제 하시겠습니까')) {
             dispatch(deletePost(postId));
-            goBack();
+            dispatch(getList());
+            history.push('/');
         }
     }
 
     useEffect(() => {
-        if( loading === false ){
-            console.log(post.id);
+        if(failureLoading && failureLoading['error'].status === 404){
+            alert('데이터가 없습니다.');
+            history.push('/');
         }
     });
 
