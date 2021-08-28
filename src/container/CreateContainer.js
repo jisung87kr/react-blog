@@ -1,6 +1,6 @@
 import Create from '../component/Create';
 import CreateActionButtonContainer from '../container/CreateActionButtonContainer';
-import { changeFeild, createPost, getPost, editPost, setInitial } from '../module/post';
+import { changeFeild, createPost, getPost, setInitial } from '../module/post';
 import { connect, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";

@@ -50,7 +50,14 @@ export function updatePost(params)
     return response;
 }
 
-export function deletePost()
+export function deletePost(params)
 {
-
+    const response = axios({
+        method: 'delete',
+        url : `http://blog.test/api/v1/posts/${params}`,
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+    return response;
 }

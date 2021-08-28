@@ -1,19 +1,18 @@
 import Show from '../component/Show';
 import ShowActionButtonContainer from "../container/ShowActionButtonContainer";
-import {getList, getPost, goToHome} from '../module/post';
-import { connect, useDispatch } from 'react-redux';
-import React, { useState, useEffect } from 'react';
-import {
-    useRouteMatch,
-    useParams,
-    Redirect,
-} from "react-router-dom";
+import {getPost, setInitial} from '../module/post';
+import { connect } from 'react-redux';
+import React, {useEffect } from 'react';
+import { useParams } from "react-router-dom";
 
-function ShowContainer({post, loading, getPost, history})
+function ShowContainer({post, loading, getPost, setInitial})
 {
     let { postId } = useParams();
     useEffect(() => {
         getPost(postId);
+        return () => {
+            setInitial();
+        }
     }, [getPost]);
     return(
         <div>
@@ -30,5 +29,6 @@ export default connect(
     }),
     {
         getPost,
+        setInitial
     }
 )(ShowContainer);

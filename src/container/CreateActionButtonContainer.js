@@ -18,7 +18,7 @@ const CreateActionButtonContainer = ({history}) => {
             title : title,
             content : content,
         }
-        if(postData){
+        if(postData.id){
             params = {
                 ...params,
                 id: postData.id,
@@ -34,6 +34,7 @@ const CreateActionButtonContainer = ({history}) => {
     }
 
     useEffect(() => {
+
         if(response){
             history.push(`/posts/${response.id}`);
             dispatch(setInitial());
