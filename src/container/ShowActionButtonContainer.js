@@ -21,11 +21,16 @@ const ShowActionButtonContainer = ({history}) => {
     }
 
     const onDelete = () => {
-        dispatch(deletePost(postId));
+        if (window.confirm('삭제 하시겠습니까')) {
+            dispatch(deletePost(postId));
+            goBack();
+        }
     }
 
     useEffect(() => {
-
+        if( loading === false ){
+            console.log(post.id);
+        }
     });
 
     return (
